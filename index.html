@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI: Complimenting and Encouraging Others</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- HTML2PDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Tone.js untuk Musik Ceria -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lavender: '#E6E6FA',
+                        lavenderDark: '#CDB4DB',
+                        babyBlue: '#89CFF0',
+                        babyBlueDark: '#6CB4EE',
+                        kemenagGreen: '#0F5132'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        arabic: ['Amiri', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Inter', sans-serif; overflow-x: hidden; background: linear-gradient(135deg, #E6E6FA, #89CFF0); min-height: 100vh; }
+        .arabic-text { font-family: 'Amiri', serif; font-size: 1.8rem; line-height: 2.5rem; text-align: right; }
+        
+        /* Glassmorphism */
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.3); }
+        .glass-card { background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(16px); border-radius: 1.5rem; box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.3); }
+        
+        /* Animations */
+        .fade-in { animation: fadeIn 0.5s ease-in forwards; }
+        .slide-up { animation: slideUp 0.6s ease-out forwards; }
+        .float { animation: float 3s ease-in-out infinite; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0% { transform: translateY(0px); } 50% { transform: translateY(-15px); } 100% { transform: translateY(0px); } }
+        
+        .hidden-section { display: none !important; }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #CDB4DB; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #89CFF0; }
+
+        /* Modal specific */
+        .modal-overlay { background-color: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); }
+        
+        @media print {
+            .no-print { display: none !important; }
+            body { background: white; }
+            .glass-card { box-shadow: none; border: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased flex flex-col items-center justify-center p-4 md:p-8">
+
+    <!-- CUSTOM MESSAGE MODAL -->
+    <div id="customModal" class="fixed inset-0 z-50 flex items-center justify-center hidden-section modal-overlay">
+        <div class="glass-card p-6 md:p-8 max-w-md w-full text-center slide-up mx-4">
+            <div id="modalIcon" class="text-4xl mb-4"></div>
+            <h3 id="modalTitle" class="text-2xl font-bold mb-2 text-gray-800"></h3>
+            <p id="modalMessage" class="text-gray-600 mb-6"></p>
+            <button onclick="closeModal()" class="w-full bg-babyBlueDark hover:bg-blue-500 text-white font-bold py-3 px-6 rounded-xl transition duration-300 shadow-md">Mengerti</button>
+        </div>
+    </div>
+
+    <!-- 1. SPLASH SCREEN -->
+    <section id="splashScreen" class="fixed inset-0 z-40 bg-gradient-to-br from-lavender to-babyBlue flex flex-col items-center justify-center transition-opacity duration-1000">
+        <div class="float text-center">
+            <i class="fas fa-comments text-6xl text-babyBlueDark mb-4 drop-shadow-lg"></i>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 tracking-tight drop-shadow-md">Smart English</h1>
+            <p class="mt-2 text-lg text-gray-700 font-medium">Interactive Learning Media</p>
+        </div>
+        <div class="mt-12">
+            <div class="w-12 h-12 border-4 border-babyBlueDark border-t-transparent rounded-full animate-spin"></div>
+        </div>
+    </section>
+
+    <!-- 2. COVER PAGE -->
+    <section id="coverPage" class="w-full max-w-4xl glass-card min-h-[85vh] flex flex-col items-center justify-between p-6 md:p-10 hidden-section relative overflow-hidden mx-auto shadow-2xl border-4 border-white">
+        
+        <!-- TOP: Title Area -->
+        <div class="text-center z-10 w-full mt-2 mb-2 fade-in">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-600 to-blue-500 drop-shadow-sm mb-2" style="font-family: 'Inter', sans-serif; letter-spacing: -0.5px;">
+                Complimenting & Encouraging
+            </h1>
+            <p class="text-md md:text-lg text-gray-600 font-medium max-w-lg mx-auto">
+                Mari belajar menghargai orang lain dengan cara yang menyenangkan!
+            </p>
+        </div>
+
+        <!-- MIDDLE: 3D Volumetric Classroom SVG Illustration -->
+        <div class="w-full max-w-2xl mx-auto my-4 flex justify-center fade-in relative transform hover:scale-[1.02] transition duration-500">
+            <!-- Decorative Background Glow -->
+            <div class="absolute inset-0 bg-gradient-to-tr from-blue-300 to-purple-300 blur-3xl opacity-40 rounded-full"></div>
+            
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" class="w-full h-auto drop-shadow-2xl rounded-[2rem] overflow-hidden relative z-10 border-4 border-white bg-white">
+                <defs>
+                    <!-- Volumetric & 3D Gradients -->
+                    <linearGradient id="wallGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f0f4f8" />
+                        <stop offset="100%" stop-color="#d9e2ec" />
+                    </linearGradient>
+                    <linearGradient id="floorGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#e2e8f0" />
+                        <stop offset="100%" stop-color="#cbd5e1" />
+                    </linearGradient>
+                    <linearGradient id="boardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#166534" />
+                        <stop offset="100%" stop-color="#14532d" />
+                    </linearGradient>
+                    <radialGradient id="sunlight" cx="20%" cy="20%" r="60%">
+                        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.8"/>
+                        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+                    </radialGradient>
+                    
+                    <!-- Skin & Clothing Gradients (3D Effect) -->
+                    <radialGradient id="skin3D" cx="30%" cy="30%" r="70%">
+                        <stop offset="0%" stop-color="#ffedd5" />
+                        <stop offset="70%" stop-color="#fdba74" />
+                        <stop offset="100%" stop-color="#ea580c" />
+                    </radialGradient>
+                    <linearGradient id="shirtBlue3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#60a5fa" />
+                        <stop offset="50%" stop-color="#2563eb" />
+                        <stop offset="100%" stop-color="#1e3a8a" />
+                    </linearGradient>
+                    <linearGradient id="shirtPink3D" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#f472b6" />
+                        <stop offset="50%" stop-color="#db2777" />
+                        <stop offset="100%" stop-color="#9d174d" />
+                    </linearGradient>
+                    <linearGradient id="deskWood" x1="0%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" stop-color="#fcd34d" />
+                        <stop offset="100%" stop-color="#b45309" />
+                    </linearGradient>
+
+                    <!-- Drop Shadows -->
+                    <filter id="shadow3D" x="-10%" y="-10%" width="130%" height="130%">
+                        <feDropShadow dx="5" dy="15" stdDeviation="10" flood-color="#0f172a" flood-opacity="0.4"/>
+                    </filter>
+                    <filter id="lightShadow" x="-10%" y="-10%" width="120%" height="120%">
+                        <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#334155" flood-opacity="0.3"/>
+                    </filter>
+                </defs>
+
+                <!-- 1. Background: Classroom Wall & Floor -->
+                <rect width="800" height="350" fill="url(#wallGrad)" />
+                <rect y="350" width="800" height="150" fill="url(#floorGrad)" />
+                <rect width="800" height="500" fill="url(#sunlight)" pointer-events="none" />
+
+                <!-- 2. Classroom Elements: Window & Board -->
+                <!-- Window (Left) -->
+                <g transform="translate(40, 50)" filter="url(#lightShadow)">
+                    <rect width="160" height="220" fill="#bae6fd" stroke="#cbd5e1" stroke-width="8" rx="10"/>
+                    <line x1="80" y1="0" x2="80" y2="220" stroke="#cbd5e1" stroke-width="8"/>
+                    <line x1="0" y1="110" x2="160" y2="110" stroke="#cbd5e1" stroke-width="8"/>
+                    <!-- Cloud outside -->
+                    <path d="M 40,80 Q 60,50 90,80 Q 120,60 140,90 Q 160,110 130,120 L 50,120 Q 20,110 40,80 Z" fill="#ffffff" opacity="0.8"/>
+                </g>
+
+                <!-- Whiteboard/Greenboard (Center-Right) -->
+                <g transform="translate(260, 60)" filter="url(#shadow3D)">
+                    <rect width="480" height="200" fill="url(#boardGrad)" stroke="#94a3b8" stroke-width="10" rx="8"/>
+                    <rect x="10" y="185" width="460" height="8" fill="#cbd5e1" rx="4"/> <!-- Chalk ledge -->
+                    <!-- Text on board -->
+                    <text x="240" y="70" font-family="'Inter', sans-serif" font-size="28" font-weight="bold" fill="#ffffff" text-anchor="middle" opacity="0.9">"Great Job!"</text>
+                    <text x="240" y="120" font-family="'Inter', sans-serif" font-size="22" font-style="italic" fill="#fef08a" text-anchor="middle" opacity="0.9">Complimenting Others</text>
+                    <!-- Sparkles on board -->
+                    <path d="M 380,50 L 385,40 L 390,50 L 400,55 L 390,60 L 385,70 L 380,60 L 370,55 Z" fill="#fef08a"/>
+                    <path d="M 90,100 L 95,90 L 100,100 L 110,105 L 100,110 L 95,120 L 90,110 L 80,105 Z" fill="#fef08a" transform="scale(0.7) translate(20, 20)"/>
+                </g>
+
+                <!-- 3. 3D Books & Stationery (On a Floating Desk) -->
+                <g transform="translate(100, 360)" filter="url(#shadow3D)">
+                    <!-- Desk Top -->
+                    <path d="M 0,40 L 250,40 L 300,100 L -50,100 Z" fill="url(#deskWood)"/>
+                    <path d="M -50,100 L 300,100 L 300,115 L -50,115 Z" fill="#92400e"/>
+                    
+                    <!-- 3D Book 1 -->
+                    <g transform="translate(20, 10)">
+                        <path d="M 0,20 L 80,0 L 140,20 L 60,40 Z" fill="#38bdf8"/>
+                        <path d="M 0,20 L 60,40 L 60,55 L 0,35 Z" fill="#0284c7"/>
+                        <path d="M 60,40 L 140,20 L 140,35 L 60,55 Z" fill="#e0f2fe"/>
+                    </g>
+
+                    <!-- 3D Book 2 (Stacked) -->
+                    <g transform="translate(30, -5)">
+                        <path d="M 0,20 L 70,0 L 130,20 L 60,40 Z" fill="#f472b6"/>
+                        <path d="M 0,20 L 60,40 L 60,50 L 0,30 Z" fill="#be185d"/>
+                        <path d="M 60,40 L 130,20 L 130,30 L 60,50 Z" fill="#fdf2f8"/>
+                    </g>
+                    
+                    <!-- Pencil Holder -->
+                    <g transform="translate(180, 5)">
+                        <ellipse cx="20" cy="0" rx="15" ry="5" fill="#94a3b8"/>
+                        <path d="M 5,0 L 5,35 A 15 5 0 0 0 35,35 L 35,0 Z" fill="#cbd5e1"/>
+                        <!-- Pencils -->
+                        <line x1="15" y1="5" x2="10" y2="-20" stroke="#facc15" stroke-width="6" stroke-linecap="round"/>
+                        <line x1="25" y1="5" x2="35" y2="-15" stroke="#ef4444" stroke-width="6" stroke-linecap="round"/>
+                    </g>
+                </g>
+
+                <!-- 4. 3D Character: Student (Left side, standing behind desk) -->
+                <g transform="translate(150, 180)" filter="url(#shadow3D)">
+                    <!-- Body (Shirt) -->
+                    <path d="M -30,100 Q 0,160 40,100 L 30,180 L -20,180 Z" fill="url(#shirtBlue3D)"/>
+                    <path d="M -35,105 C -50,130 -60,150 -40,160 C -30,165 -15,140 -15,130 Z" fill="url(#shirtBlue3D)"/> <!-- Arm Left -->
+                    
+                    <!-- Hand giving Thumbs Up -->
+                    <circle cx="-40" cy="160" r="10" fill="url(#skin3D)"/>
+                    <path d="M -45,155 Q -45,145 -35,150" stroke="url(#skin3D)" stroke-width="6" stroke-linecap="round"/>
+
+                    <!-- Head -->
+                    <ellipse cx="5" cy="50" rx="35" ry="40" fill="url(#skin3D)"/>
+                    <!-- Hair -->
+                    <path d="M -35,40 Q -30,-10 10,-10 Q 40,-5 40,40 Q 45,10 10,0 Q -40,10 -35,40 Z" fill="#1e293b"/>
+                    
+                    <!-- Face Details -->
+                    <circle cx="-10" cy="45" r="4" fill="#0f172a"/> <!-- Eye L -->
+                    <circle cx="20" cy="45" r="4" fill="#0f172a"/> <!-- Eye R -->
+                    <path d="M 0,60 Q 5,70 10,60" fill="none" stroke="#0f172a" stroke-width="3" stroke-linecap="round"/> <!-- Smile -->
+                    <!-- Catchlights -->
+                    <circle cx="-11" cy="44" r="1.5" fill="#ffffff"/>
+                    <circle cx="19" cy="44" r="1.5" fill="#ffffff"/>
+                </g>
+
+                <!-- 5. 3D Character: Teacher (Right side, giving compliment) -->
+                <g transform="translate(580, 140)" filter="url(#shadow3D)">
+                    <!-- Body (Dress/Suit) -->
+                    <path d="M -40,110 C -10,70 20,70 40,110 L 50,220 L -50,220 Z" fill="url(#shirtPink3D)"/>
+                    <!-- Arm Right (Pointing/Gesturing) -->
+                    <path d="M 35,115 C 60,140 80,120 60,100 C 50,90 30,110 30,110 Z" fill="url(#shirtPink3D)"/>
+                    <circle cx="65" cy="100" r="9" fill="url(#skin3D)"/>
+                    
+                    <!-- Arm Left (Holding Book) -->
+                    <path d="M -35,115 C -60,150 -50,170 -30,170 Z" fill="url(#shirtPink3D)"/>
+                    <!-- Book in hand -->
+                    <rect x="-60" y="150" width="30" height="40" rx="3" fill="#38bdf8" transform="rotate(-20 -45 170)"/>
+                    <circle cx="-35" cy="170" r="9" fill="url(#skin3D)"/>
+
+                    <!-- Head -->
+                    <ellipse cx="0" cy="50" rx="32" ry="38" fill="url(#skin3D)"/>
+                    <!-- Hijab/Hair (Using Hijab for cultural context) -->
+                    <path d="M -35,40 C -45,-10 0,-30 35,30 C 45,70 30,110 0,110 C -30,110 -40,80 -35,40 Z" fill="#fbcfe8"/>
+                    
+                    <!-- Face Details -->
+                    <circle cx="-12" cy="48" r="4" fill="#0f172a"/>
+                    <circle cx="12" cy="48" r="4" fill="#0f172a"/>
+                    <!-- Glasses -->
+                    <rect x="-18" y="42" width="14" height="10" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
+                    <rect x="4" y="42" width="14" height="10" rx="2" fill="none" stroke="#0f172a" stroke-width="2"/>
+                    <line x1="-4" y1="47" x2="4" y2="47" stroke="#0f172a" stroke-width="2"/>
+                    
+                    <!-- Smile -->
+                    <path d="M -5,62 Q 0,72 5,62 Z" fill="#ef4444" stroke="#0f172a" stroke-width="1" stroke-linejoin="round"/>
+                    <!-- Catchlights -->
+                    <circle cx="-13" cy="47" r="1.5" fill="#ffffff"/>
+                    <circle cx="11" cy="47" r="1.5" fill="#ffffff"/>
+                </g>
+
+                <!-- Floating 3D Emoticons (Appreciation) -->
+                <g transform="translate(420, 200)" filter="url(#shadow3D)">
+                    <circle cx="0" cy="0" r="18" fill="#facc15"/>
+                    <path d="M -8,-2 Q -4,-10 0,-2 Q 4,-10 8,-2 Q 0,8 -8,-2 Z" fill="#ef4444"/> <!-- Heart eye -->
+                    <circle cx="-6" cy="-4" r="3" fill="#ef4444"/>
+                    <circle cx="6" cy="-4" r="3" fill="#ef4444"/>
+                    <path d="M -6,6 Q 0,12 6,6" fill="none" stroke="#0f172a" stroke-width="2" stroke-linecap="round"/>
+                    <animateTransform attributeName="transform" type="translate" values="420,200; 420,180; 420,200" dur="2s" repeatCount="indefinite"/>
+                </g>
+                <g transform="translate(320, 180)" filter="url(#shadow3D)">
+                    <path d="M 0,0 L 10,-10 L 20,0 L 10,10 Z" fill="#fcd34d">
+                        <animateTransform attributeName="transform" type="rotate" values="0 10 0; 180 10 0; 360 10 0" dur="4s" repeatCount="indefinite"/>
+                    </path>
+                </g>
+
+            </svg>
+        </div>
+
+        <!-- BOTTOM: Input Area & Identity -->
+        <div class="w-full flex flex-col items-center z-10 bg-white/70 p-6 rounded-3xl backdrop-blur-md border border-white/60 shadow-lg mt-2">
+            <div class="flex flex-col sm:flex-row gap-4 w-full max-w-xl mb-5">
+                <div class="flex-1 relative">
+                    <i class="fas fa-user absolute left-4 top-1/2 transform -translate-y-1/2 text-blue-400"></i>
+                    <input type="text" id="studentName" placeholder="Nama Lengkap Siswa" class="w-full pl-10 pr-4 py-3 rounded-2xl border-2 border-blue-200 bg-white focus:border-blue-500 focus:ring-4 focus:ring-blue-100 focus:outline-none shadow-inner transition text-gray-800 font-semibold">
+                </div>
+                <div class="flex-1 relative">
+                    <i class="fas fa-chalkboard absolute left-4 top-1/2 transform -translate-y-1/2 text-purple-400"></i>
+                    <select id="studentClass" class="w-full pl-10 pr-4 py-3 rounded-2xl border-2 border-purple-200 bg-white focus:border-purple-500 focus:ring-4 focus:ring-purple-100 focus:outline-none shadow-inner transition text-gray-800 font-semibold appearance-none">
+                        <option value="" disabled selected>Pilih Kelas</option>
+                        <option value="X - IPA">X - IPA</option>
+                        <option value="X - IPS">X - IPS</option>
+                        <option value="X - Keagamaan">X - Keagamaan</option>
+                    </select>
+                    <i class="fas fa-chevron-down absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 pointer-events-none text-sm"></i>
+                </div>
+            </div>
+            
+            <button onclick="submitForm()" class="w-full max-w-xl bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white font-bold py-4 px-8 rounded-2xl shadow-[0_10px_25px_rgba(79,70,229,0.4)] transition transform hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(79,70,229,0.6)] z-10 text-xl flex justify-center items-center gap-3 tracking-wide">
+                Mulai Pembelajaran <i class="fas fa-rocket"></i>
+            </button>
+        </div>
+    </section>
+
+    <!-- 3. LAYER INTRO (PANDUAN) -->
+    <section id="introSection" class="w-full max-w-2xl glass-card p-8 hidden-section slide-up text-center">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">Selamat Datang, <span id="displayName" class="text-blue-600"></span>!</h2>
+        <p class="text-gray-600 mb-8">Sebelum memulai, mari pahami alur belajar kita hari ini.</p>
+        
+        <div id="guideSlides" class="min-h-[200px]">
+            <!-- Injected via JS -->
+        </div>
+
+        <div class="flex justify-center gap-2 mt-6 mb-8" id="guideDots">
+            <!-- Dots injected via JS -->
+        </div>
+
+        <div class="flex justify-between mt-4">
+            <button id="btnPrevGuide" onclick="changeGuide(-1)" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-xl transition opacity-0 cursor-default"><i class="fas fa-chevron-left mr-2"></i> Kembali</button>
+            <button id="btnNextGuide" onclick="changeGuide(1)" class="bg-babyBlueDark hover:bg-blue-500 text-white font-bold py-2 px-6 rounded-xl transition">Selanjutnya <i class="fas fa-chevron-right ml-2"></i></button>
+        </div>
+    </section>
+
+    <!-- 4. DASHBOARD UTAMA -->
+    <section id="dashboardSection" class="w-full max-w-5xl hidden-section slide-up">
+        <div class="glass-card p-6 mb-6 flex justify-between items-center">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">Menu Utama</h2>
+                <p class="text-gray-600 text-sm">Siswa: <strong id="dashName"></strong> | Kelas: <strong id="dashClass"></strong></p>
+            </div>
+            <div class="text-right">
+                <span class="bg-babyBlue/30 text-blue-800 px-3 py-1 rounded-full text-xs font-bold border border-babyBlue">Topik: Complimenting</span>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <!-- Belajar -->
+            <div onclick="enterSection('belajar')" class="glass-card p-6 cursor-pointer transform transition hover:-translate-y-2 hover:shadow-xl border-t-4 border-t-blue-400 group relative flex flex-col">
+                <div class="absolute top-4 right-4 text-blue-500 text-xl"><i class="fas fa-unlock"></i></div>
+                <div class="w-16 h-16 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 text-2xl mb-4 group-hover:scale-110 transition"><i class="fas fa-book-open"></i></div>
+                <h3 class="text-xl font-bold mb-2">BELAJAR</h3>
+                <p class="text-gray-600 text-sm flex-1">Pelajari materi mendalam tentang cara memuji dan menghargai orang lain.</p>
+            </div>
+            
+            <!-- Bermain -->
+            <div id="cardBermain" onclick="enterSection('bermain')" class="glass-card p-6 cursor-pointer transform transition border-t-4 border-t-gray-400 bg-gray-50 opacity-80 relative group flex flex-col">
+                <div id="lockBermain" class="absolute top-4 right-4 text-gray-500 text-xl"><i class="fas fa-lock"></i></div>
+                <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-2xl mb-4"><i class="fas fa-gamepad"></i></div>
+                <h3 class="text-xl font-bold mb-2 text-gray-600">BERMAIN</h3>
+                <p class="text-gray-500 text-sm flex-1">Tantangan gamifikasi literasi & numerasi. (Selesaikan menu Belajar untuk membuka).</p>
+            </div>
+            
+            <!-- Berlatih -->
+            <div id="cardBerlatih" onclick="enterSection('berlatih')" class="glass-card p-6 cursor-pointer transform transition border-t-4 border-t-gray-400 bg-gray-50 opacity-80 relative group flex flex-col">
+                <div id="lockBerlatih" class="absolute top-4 right-4 text-gray-500 text-xl"><i class="fas fa-lock"></i></div>
+                <div class="w-16 h-16 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 text-2xl mb-4"><i class="fas fa-pen-clip"></i></div>
+                <h3 class="text-xl font-bold mb-2 text-gray-600">BERLATIH</h3>
+                <p class="text-gray-500 text-sm flex-1">Evaluasi berjenjang (HOTS). (Selesaikan menu Bermain untuk membuka).</p>
+            </div>
+
+            <!-- Referensi (NEW) -->
+            <div onclick="enterSection('referensi')" class="glass-card p-6 cursor-pointer transform transition hover:-translate-y-2 hover:shadow-xl border-t-4 border-t-orange-400 group relative flex flex-col bg-white">
+                <div class="absolute top-4 right-4 text-orange-500 text-xl"><i class="fas fa-bookmark"></i></div>
+                <div class="w-16 h-16 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 text-2xl mb-4 group-hover:scale-110 transition"><i class="fas fa-book"></i></div>
+                <h3 class="text-xl font-bold mb-2 text-gray-800">REFERENSI</h3>
+                <p class="text-gray-600 text-sm flex-1">Sumber materi dan daftar pustaka yang digunakan dalam MPI ini.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. LAYER MENU 1: BELAJAR -->
+    <section id="belajarSection" class="w-full max-w-4xl glass-card p-6 md:p-8 hidden-section slide-up min-h-[70vh] flex flex-col relative">
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-book-open text-blue-500 mr-2"></i>Materi Belajar</h2>
+            <span class="bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-600">Slide <span id="materiCurrent">1</span> / 6</span>
+        </div>
+        
+        <div id="materiContent" class="flex-1 overflow-y-auto pr-2 mb-6">
+            <!-- Injected via JS -->
+        </div>
+
+        <!-- Interactive Pemantik -->
+        <div id="materiActivity" class="bg-blue-50 p-4 rounded-xl border border-blue-200 mb-6">
+            <!-- Injected via JS -->
+        </div>
+
+        <div class="flex justify-between items-center mt-auto">
+            <button onclick="navTo('dashboardSection')" class="text-gray-500 hover:text-gray-700 font-semibold"><i class="fas fa-home mr-1"></i> Dashboard</button>
+            <button id="btnNextMateri" onclick="nextMateri()" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-xl font-bold transition shadow disabled:opacity-50 disabled:cursor-not-allowed">Selesai & Lanjut <i class="fas fa-chevron-right ml-2"></i></button>
+        </div>
+    </section>
+
+    <!-- 7. LAYER MENU 2: BERMAIN (Gamifikasi) -->
+    <section id="bermainSection" class="w-full max-w-4xl glass-card p-6 md:p-8 hidden-section slide-up min-h-[80vh] flex flex-col">
+        <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800 flex items-center">
+                <i class="fas fa-map-marked-alt text-purple-500 mr-2"></i>Eksplorasi Banuroja
+                <button onclick="toggleBGM()" class="ml-4 w-10 h-10 bg-purple-100 rounded-full hover:bg-purple-200 transition flex items-center justify-center shadow-inner" title="Matikan/Nyalakan Musik">
+                    <i id="bgmToggleIcon" class="fas fa-volume-up text-purple-600"></i>
+                </button>
+            </h2>
+            <div class="text-right">
+                <span class="block bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm font-bold mb-1">Skor: <span id="bermainScore">0</span></span>
+                <span class="text-xs text-gray-500 font-semibold" id="bermainProgressText">Lokasi Selesai: 0 / 4</span>
+            </div>
+        </div>
+        
+        <!-- PETA VIEW (EXPLORE) -->
+        <div id="bermainMap" class="flex-1 flex flex-col items-center justify-center">
+            <h3 class="text-xl font-bold text-gray-700 mb-6"><i class="fas fa-compass text-blue-500 mr-2"></i>Pilih Lokasi untuk Dieksplorasi</h3>
+            <div id="bermainMapCards" class="grid grid-cols-1 md:grid-cols-2 gap-6 w-full max-w-2xl">
+                <!-- Map Cards di-inject via JS -->
+            </div>
+            <button onclick="navTo('dashboardSection')" class="mt-8 text-gray-500 hover:text-gray-700 font-semibold"><i class="fas fa-home mr-1"></i> Kembali ke Dashboard</button>
+        </div>
+
+        <!-- CHALLENGE VIEW -->
+        <div id="bermainChallenge" class="flex-1 flex flex-col hidden-section mt-4">
+            <!-- Stimulus Reading & Image -->
+            <div class="mb-6 flex flex-col md:flex-row gap-4">
+                <div id="bermainImageContainer" class="w-full md:w-1/3 h-48 rounded-xl border border-gray-200 shadow-sm fade-in overflow-hidden">
+                    <!-- SVG Animated injected here -->
+                </div>
+                <div id="bermainStimulus" class="flex-1 bg-white/80 p-4 rounded-xl border border-gray-200 text-sm text-gray-700 leading-relaxed shadow-sm max-h-48 overflow-y-auto text-justify">
+                    <!-- Injected via JS -->
+                </div>
+            </div>
+
+            <!-- Question Area -->
+            <div id="bermainQuestion" class="flex-1 mb-6">
+                <!-- Injected via JS -->
+            </div>
+
+            <div class="mt-auto flex justify-between items-center">
+                <button onclick="backToMap()" class="text-gray-500 hover:text-gray-700 font-semibold px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-100 transition"><i class="fas fa-map mr-1"></i> Kembali ke Peta</button>
+                <div id="bermainFeedback" class="font-bold text-lg hidden"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. LAYER MENU 3: BERLATIH (Asesmen) -->
+    <section id="berlatihSection" class="w-full max-w-4xl glass-card p-6 md:p-8 hidden-section slide-up min-h-[80vh] flex flex-col">
+        <div class="flex justify-between items-center mb-4 pb-4 border-b border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-pen-clip text-kemenagGreen mr-2"></i>Asesmen Berlatih</h2>
+            <div class="text-right">
+                <span id="berlatihLevelBadge" class="block px-3 py-1 rounded-full text-xs font-bold mb-1 text-white shadow-sm">Level</span>
+                <span class="text-xs text-gray-500 font-semibold">Soal <span id="berlatihCurrent">1</span> / 10</span>
+            </div>
+        </div>
+        
+        <div id="berlatihStimulus" class="bg-white/80 p-4 rounded-xl border border-gray-200 mb-6 text-sm text-gray-700 leading-relaxed shadow-sm max-h-48 overflow-y-auto text-justify">
+             <!-- Injected via JS -->
+        </div>
+
+        <div id="berlatihQuestion" class="flex-1 mb-6">
+             <!-- Injected via JS -->
+        </div>
+    </section>
+
+    <!-- 9. LAYER MENU 4: REFERENSI (Buku Teks) -->
+    <section id="referensiSection" class="w-full max-w-3xl glass-card p-6 md:p-8 hidden-section slide-up min-h-[70vh] flex flex-col relative mx-auto">
+        <div class="flex justify-between items-center mb-6 pb-4 border-b border-gray-200">
+            <h2 class="text-2xl font-bold text-gray-800"><i class="fas fa-bookmark text-orange-500 mr-2"></i>Referensi Materi</h2>
+        </div>
+        
+        <div class="flex-1 flex flex-col items-center justify-center text-center">
+            <!-- Ilustrasi Buku -->
+            <div class="w-40 h-52 bg-white rounded-lg shadow-xl mb-6 border border-gray-300 relative overflow-hidden flex flex-col hover:scale-105 transition transform duration-300">
+                <div class="w-full bg-blue-600 text-white text-xs font-bold py-2 shadow-sm uppercase tracking-widest">KEMDIKBUD</div>
+                <div class="flex-1 flex items-center justify-center bg-gray-100">
+                    <i class="fas fa-book-open text-6xl text-gray-400"></i>
+                </div>
+                <div class="bg-white py-3 border-t border-gray-200">
+                    <div class="text-[0.7rem] font-bold text-gray-800 leading-tight">Bahasa Inggris<br>Kelas X</div>
+                </div>
+            </div>
+            
+            <h3 class="text-2xl font-extrabold text-gray-800 mb-3">Bahasa Inggris SMA/MA/SMK/MAK Kelas X</h3>
+            <div class="space-y-2 text-gray-700">
+                <p><strong>Edisi:</strong> Revisi 2017</p>
+                <p><strong>Penulis:</strong> Utami Widiati, Zuliati Rohmah, dan Furaidah</p>
+                <p><strong>Penerbit:</strong> Pusat Kurikulum dan Perbukuan, Balitbang, Kemendikbud</p>
+            </div>
+            
+            <div class="mt-8 bg-orange-50 border-l-4 border-orange-400 rounded-r-xl p-5 max-w-lg text-left shadow-sm">
+                <h4 class="font-bold text-orange-800 mb-2 text-lg"><i class="fas fa-info-circle mr-2"></i>Kesesuaian Materi (Content Mapping)</h4>
+                <p class="text-sm text-gray-700 leading-relaxed">
+                    Konten dalam Media Pembelajaran Interaktif ini merujuk secara khusus pada <strong>Chapter 2: Congratulating and Complimenting Others (Halaman 20 - 37)</strong>. Mengacu pada Kurikulum 2013, materi ini berfokus pada pengembangan keterampilan komunikasi interaksional (interactional communication) untuk membangun relasi sosial yang positif.
+                </p>
+            </div>
+        </div>
+
+        <div class="mt-10 flex justify-start">
+            <button onclick="navTo('dashboardSection')" class="bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-2 px-6 rounded-xl transition border border-gray-300 shadow-sm"><i class="fas fa-arrow-left mr-2"></i> Kembali ke Dashboard</button>
+        </div>
+    </section>
+
+    <!-- 10. LAPORAN HASIL BELAJAR -->
+    <section id="reportSection" class="w-full max-w-4xl glass-card p-8 hidden-section slide-up relative">
+        <div id="printableReport" class="p-4 bg-white rounded-lg">
+            <!-- Kop Surat -->
+            <div class="text-center border-b-4 border-kemenagGreen pb-4 mb-6">
+                <h1 class="text-2xl font-extrabold text-gray-800 uppercase tracking-wide">Laporan Hasil Belajar</h1>
+                <h2 class="text-lg font-bold text-gray-700">Media Pembelajaran Interaktif: Complimenting and Encouraging Others</h2>
+                <p class="text-sm text-gray-600 mt-2">Dikembangkan oleh: <strong>Novi Enita Kasih, S.Pd</strong> | MAS Salafiyah Syafi'iyah</p>
+                <p class="text-xs text-gray-500">Kurikulum Berbasis Cinta (KBC) Kemenag RI</p>
+            </div>
+            
+            <!-- Data Siswa -->
+            <div class="mb-6 grid grid-cols-2 gap-4 bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <div><p class="text-sm text-gray-600">Nama Lengkap:</p><p id="repName" class="font-bold text-gray-800 text-lg"></p></div>
+                <div><p class="text-sm text-gray-600">Kelas / Fase:</p><p id="repClass" class="font-bold text-gray-800 text-lg"></p></div>
+                <div><p class="text-sm text-gray-600">Tanggal:</p><p id="repDate" class="font-bold text-gray-800"></p></div>
+                <div><p class="text-sm text-gray-600">Mata Pelajaran:</p><p class="font-bold text-gray-800">Bahasa Inggris (Wajib)</p></div>
+            </div>
+
+            <!-- Rekapitulasi -->
+            <div class="mb-6">
+                <h3 class="text-lg font-bold text-gray-800 border-b border-gray-300 pb-2 mb-4">Rekapitulasi Performa</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border rounded-lg p-4 bg-purple-50 border-purple-200 text-center">
+                        <h4 class="font-bold text-purple-800 mb-2">Sesi BERMAIN (Gamifikasi)</h4>
+                        <p class="text-4xl font-extrabold text-purple-600" id="repSkorBermain">0</p>
+                        <p class="text-sm text-purple-700 mt-1">Total Poin</p>
+                    </div>
+                    <div class="border rounded-lg p-4 bg-green-50 border-green-200 text-center">
+                        <h4 class="font-bold text-green-800 mb-2">Sesi BERLATIH (Asesmen)</h4>
+                        <p class="text-4xl font-extrabold text-green-600" id="repSkorBerlatih">0</p>
+                        <p class="text-sm text-green-700 mt-1">Nilai Akhir (Skala 100)</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rincian Berlatih -->
+            <div class="mb-6">
+                <h3 class="text-lg font-bold text-gray-800 border-b border-gray-300 pb-2 mb-4">Rincian Penguasaan Kognitif</h3>
+                <table class="w-full text-left border-collapse border border-gray-200">
+                    <thead>
+                        <tr class="bg-gray-100 text-sm">
+                            <th class="border border-gray-200 p-2">Level Kognitif</th>
+                            <th class="border border-gray-200 p-2">Soal</th>
+                            <th class="border border-gray-200 p-2">Benar</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-sm">
+                        <tr>
+                            <td class="border border-gray-200 p-2">Level 1 (Dasar/Pemahaman)</td>
+                            <td class="border border-gray-200 p-2">Nomor 1-3</td>
+                            <td class="border border-gray-200 p-2 font-bold" id="repL1">-</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-200 p-2">Level 2 (Aplikasi)</td>
+                            <td class="border border-gray-200 p-2">Nomor 4-7</td>
+                            <td class="border border-gray-200 p-2 font-bold" id="repL2">-</td>
+                        </tr>
+                        <tr>
+                            <td class="border border-gray-200 p-2">Level 3 (HOTS/Penalaran)</td>
+                            <td class="border border-gray-200 p-2">Nomor 8-10</td>
+                            <td class="border border-gray-200 p-2 font-bold" id="repL3">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- KBC & Rekomendasi -->
+            <div class="mb-2">
+                <h3 class="text-lg font-bold text-gray-800 border-b border-gray-300 pb-2 mb-3">Catatan Kurikulum Berbasis Cinta (KBC)</h3>
+                <p class="text-sm text-gray-700 mb-4 italic bg-blue-50 p-3 rounded">"Peserta didik telah menumbuhkan sikap cinta sesama dan toleransi, sejalan dengan harmoni kehidupan masyarakat Banuroja, serta mampu menerapkan <span class="font-arabic font-bold text-lg">وَقُولُوا۟ لِلنَّاسِ حُسْنًا</span> dalam berinteraksi."</p>
+                
+                <h3 class="text-lg font-bold text-gray-800 border-b border-gray-300 pb-2 mb-3">Rekomendasi Guru</h3>
+                <p class="text-sm font-bold text-kemenagGreen" id="repPredikat"></p>
+                <p class="text-sm text-gray-700" id="repRekomendasi"></p>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-center no-print">
+            <button onclick="downloadPDF()" class="bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-8 rounded-xl shadow-lg transition flex items-center">
+                <i class="fas fa-file-pdf mr-2 text-xl"></i> Unduh / Cetak Laporan PDF
+            </button>
+        </div>
+    </section>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // =========================================================================
+        // URL WEB APP GOOGLE APPS SCRIPT ANDA DISINI (PASTIKAN URL DIAWALI HTTPS)
+        // =========================================================================
+        const GAS_URL = "https://script.google.com/macros/s/AKfycbwse8osMSsHnukzisK78TtZr3cheU8ut0R1DTkZci8pa4lmHHECfqeLTiw3Y0OT3KRi/exec"; 
+
+        // --- State Management ---
+        const State = {
+            student: { name: "", class: "" },
+            progress: { belajarCompleted: false, bermainCompleted: false },
+            scores: { bermain: 0, berlatih: 0, l1: 0, l2: 0, l3: 0 },
+            currentSection: 'coverPage',
+            activeSlide: 0
+        };
+
+        // Trackers for GAS
+        let trackedBermainAnswers = [];
+        let trackedBerlatihAnswers = [];
+
+        // --- Custom Modal ---
+        function showMessage(title, message, type = 'info') {
+            const modal = document.getElementById('customModal');
+            const mTitle = document.getElementById('modalTitle');
+            const mMsg = document.getElementById('modalMessage');
+            const mIcon = document.getElementById('modalIcon');
+            
+            mTitle.innerText = title;
+            mMsg.innerText = message;
+            
+            if(type === 'error') {
+                mIcon.innerHTML = '<i class="fas fa-exclamation-circle text-red-500"></i>';
+                mTitle.className = "text-2xl font-bold mb-2 text-red-600";
+            } else if (type === 'success') {
+                mIcon.innerHTML = '<i class="fas fa-check-circle text-green-500"></i>';
+                mTitle.className = "text-2xl font-bold mb-2 text-green-600";
+            } else {
+                mIcon.innerHTML = '<i class="fas fa-info-circle text-blue-500"></i>';
+                mTitle.className = "text-2xl font-bold mb-2 text-blue-600";
+            }
+            
+            modal.classList.remove('hidden-section');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.add('hidden-section');
+        }
+
+        // --- Navigation ---
+        function navTo(sectionId) {
+            if(typeof stopBGM === 'function') stopBGM(); 
+            document.querySelectorAll('section').forEach(sec => {
+                if(sec.id !== 'splashScreen') sec.classList.add('hidden-section');
+            });
+            document.getElementById(sectionId).classList.remove('hidden-section');
+            State.currentSection = sectionId;
+            window.scrollTo(0,0);
+        }
+
+        // --- Initialization ---
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('splashScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('splashScreen').classList.add('hidden-section');
+                    navTo('coverPage');
+                }, 1000);
+            }, 2000);
+        };
+
+        // --- Mengirim Data Soal ke GAS (Satu Kali Saja Saat Mulai) ---
+        function initializeGASSoal() {
+            if (GAS_URL === "URL_GAS_ANDA_DISINI") return;
+            const payload = {
+                action: "saveSoal",
+                bermainData: bermainData,
+                berlatihData: berlatihData
+            };
+            fetch(GAS_URL, {
+                method: 'POST',
+                redirect: 'follow', // Penting untuk GAS yang sering me-redirect url request
+                headers: {
+                    // text/plain mencegah trigger preflight CORS OPTIONS request yang diblokir oleh GAS
+                    'Content-Type': 'text/plain;charset=utf-8', 
+                },
+                body: JSON.stringify(payload)
+            }).catch(e => console.log("Silent error:", e));
+        }
+
+        // --- Form Handling ---
+        function submitForm() {
+            const nameInput = document.getElementById('studentName').value.trim();
+            const classInput = document.getElementById('studentClass').value;
+            
+            if(!nameInput || !classInput) {
+                showMessage("Data Belum Lengkap", "Silakan isi Nama Lengkap dan Kelas Anda untuk melanjutkan.", "error");
+                return;
+            }
+            
+            State.student.name = nameInput;
+            State.student.class = classInput;
+            
+            document.getElementById('dashName').innerText = nameInput;
+            document.getElementById('dashClass').innerText = classInput;
+            document.getElementById('displayName').innerText = nameInput;
+            
+            // Inisialisasi Bank Soal ke Spreadsheet secara background
+            initializeGASSoal();
+
+            initGuideSlides();
+            navTo('introSection');
+        }
+
+        // --- Intro Guides ---
+        const guides = [
+            { icon: 'fa-book-reader text-blue-500', title: "Belajar Terstruktur", desc: "Ikuti 6 slide materi mendalam tentang Complimenting. Pahami konteks lokal dan nilai spiritual di dalamnya." },
+            { icon: 'fa-gamepad text-purple-500', title: "Bermain Sambil Belajar", desc: "Selesaikan 10 tantangan interaktif berbasis literasi dan numerasi tentang budaya Randangan." },
+            { icon: 'fa-graduation-cap text-green-500', title: "Evaluasi Akhir (HOTS)", desc: "Uji kemampuanmu melalui 10 soal asesmen berjenjang. Dapatkan laporan belajarmu di akhir sesi!" }
+        ];
+        let guideIndex = 0;
+        
+        function initGuideSlides() { renderGuide(); }
+        
+        function renderGuide() {
+            const container = document.getElementById('guideSlides');
+            const dots = document.getElementById('guideDots');
+            const slide = guides[guideIndex];
+            
+            container.innerHTML = `
+                <div class="fade-in flex flex-col items-center">
+                    <div class="w-24 h-24 rounded-full bg-white shadow-md flex items-center justify-center text-4xl mb-6">
+                        <i class="fas ${slide.icon}"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-3">${slide.title}</h3>
+                    <p class="text-gray-600 max-w-sm">${slide.desc}</p>
+                </div>
+            `;
+            
+            let dotsHtml = '';
+            for(let i=0; i<guides.length; i++) {
+                dotsHtml += `<div class="w-3 h-3 rounded-full ${i === guideIndex ? 'bg-babyBlueDark' : 'bg-gray-300'}"></div>`;
+            }
+            dots.innerHTML = dotsHtml;
+            
+            const btnPrev = document.getElementById('btnPrevGuide');
+            const btnNext = document.getElementById('btnNextGuide');
+            
+            if(guideIndex === 0) { btnPrev.classList.add('opacity-0', 'cursor-default'); } 
+            else { btnPrev.classList.remove('opacity-0', 'cursor-default'); }
+            
+            if(guideIndex === guides.length - 1) {
+                btnNext.innerHTML = 'Masuk Menu Utama <i class="fas fa-sign-in-alt ml-2"></i>';
+                btnNext.classList.replace('bg-babyBlueDark', 'bg-green-500');
+                btnNext.classList.replace('hover:bg-blue-500', 'hover:bg-green-600');
+            } else {
+                btnNext.innerHTML = 'Selanjutnya <i class="fas fa-chevron-right ml-2"></i>';
+                btnNext.classList.replace('bg-green-500', 'bg-babyBlueDark');
+                btnNext.classList.replace('hover:bg-green-600', 'hover:bg-blue-500');
+            }
+        }
+        
+        function changeGuide(dir) {
+            if(dir === -1 && guideIndex === 0) return;
+            if(dir === 1 && guideIndex === guides.length - 1) { navTo('dashboardSection'); return; }
+            guideIndex += dir;
+            renderGuide();
+        }
+
+        // --- Dashboard Locking & Menu Logic ---
+        function enterSection(sec) {
+            if (sec === 'belajar') { initBelajar(); navTo('belajarSection'); } 
+            else if (sec === 'bermain') {
+                if (!State.progress.belajarCompleted) { showMessage("Menu Terkunci", "Silakan selesaikan menu BELAJAR terlebih dahulu.", "error"); return; }
+                initBermain(); navTo('bermainSection');
+                if(typeof playBGM === 'function') playBGM(); 
+            } 
+            else if (sec === 'berlatih') {
+                if (!State.progress.bermainCompleted) { showMessage("Menu Terkunci", "Silakan selesaikan menu BERMAIN terlebih dahulu.", "error"); return; }
+                initBerlatih(); navTo('berlatihSection');
+            } 
+            else if (sec === 'referensi') { navTo('referensiSection'); }
+        }
+
+        function unlockNextSection(currentFinished) {
+            if (currentFinished === 'belajar') {
+                State.progress.belajarCompleted = true;
+                const card = document.getElementById('cardBermain'); const lock = document.getElementById('lockBermain');
+                card.classList.remove('opacity-80', 'bg-gray-50', 'border-t-gray-400'); card.classList.add('bg-white', 'border-t-purple-400');
+                card.innerHTML = card.innerHTML.replace('text-gray-500', 'text-purple-500').replace('bg-gray-200', 'bg-purple-100').replace('text-gray-600', 'text-gray-800');
+                lock.innerHTML = '<i class="fas fa-unlock"></i>'; lock.className = 'absolute top-4 right-4 text-purple-500 text-xl';
+                showMessage("Selamat!", "Menu BERMAIN sekarang telah terbuka. Lanjutkan perjuanganmu!", "success");
+            } else if (currentFinished === 'bermain') {
+                State.progress.bermainCompleted = true;
+                const card = document.getElementById('cardBerlatih'); const lock = document.getElementById('lockBerlatih');
+                card.classList.remove('opacity-80', 'bg-gray-50', 'border-t-gray-400'); card.classList.add('bg-white', 'border-t-kemenagGreen');
+                card.innerHTML = card.innerHTML.replace('text-gray-500', 'text-kemenagGreen').replace('bg-gray-200', 'bg-green-100').replace('text-gray-600', 'text-gray-800');
+                lock.innerHTML = '<i class="fas fa-unlock"></i>'; lock.className = 'absolute top-4 right-4 text-kemenagGreen text-xl';
+                showMessage("Luar Biasa!", "Menu BERLATIH kini dapat diakses. Tunjukkan kemampuan terbaikmu!", "success");
+            }
+        }
+
+        // --- DATA: BELAJAR ---
+        const materiData = [
+            {
+                title: "1. Pengertian Compliment",
+                content: `<p class="mb-3"><strong>Compliment</strong> adalah ekspresi pujian yang diberikan kepada seseorang untuk menghargai sifat, pencapaian, atau penampilan mereka. Ini sangat penting untuk <em>interactional communication</em>.</p><div class="bg-yellow-50 p-3 border-l-4 border-yellow-400 mb-3 text-sm"><strong>Konteks Banuroja:</strong> Di desa Banuroja yang berada di dataran tinggi Randangan, masyarakatnya hidup rukun walau berbeda agama dan suku. Memberikan pujian adalah salah satu cara menjaga kerukunan tersebut.</div><p class="text-right arabic-text text-kemenagGreen mt-4">وَقُولُوا۟ لِلنَّاسِ حُسْنًا</p><p class="text-right text-xs text-gray-500 italic">"Serta ucapkanlah kata-kata yang baik kepada manusia" (QS 2:83)</p>`,
+                q: "Apa tujuan utama dari compliment berdasarkan konteks di atas?", opts: ["Mengkritik penampilan", "Menjaga kerukunan dan menghargai", "Menanyakan identitas"], ans: 1
+            },
+            {
+                title: "2. Complimenting Appearance",
+                content: `<p class="mb-3">Kita sering memuji penampilan atau barang yang dimiliki orang lain (<em>things/appearance</em>).</p><ul class="list-disc pl-5 mb-3 text-sm"><li>"What a beautiful skirt you are wearing."</li><li>"You look gorgeous in that dress!"</li></ul><div class="bg-green-50 p-3 border border-green-200 rounded text-sm mb-3"><i class="fas fa-leaf text-green-600"></i> <strong>KBC:</strong> Walau kita memuji fisik, ingatlah bahwa Allah lebih melihat hati kita. Pujian pada sesama makhluk ciptaan-Nya adalah bentuk kasih sayang.</div>`,
+                q: "Pilih kalimat yang tepat untuk memuji pakaian seseorang:", opts: ["You look gorgeous in that dress!", "You must be very proud.", "I am very happy for you."], ans: 0
+            },
+            {
+                title: "3. Complimenting Achievements",
+                content: `<p class="mb-3">Saat teman meraih kesuksesan, berikan pujian untuk menyemangatinya (<em>encouraging</em>).</p><ul class="list-disc pl-5 mb-3 text-sm"><li>"Congratulations! You deserved it, Man."</li><li>"Excellent. You really did a great job."</li><li>"Terrific! I am proud of you."</li></ul><p class="text-sm">Misal: Temanmu memenangkan lomba pidato antar umat beragama tingkat Kecamatan Randangan.</p>`,
+                q: "Mana pujian yang cocok untuk teman yang memenangkan lomba pidato?", opts: ["What a nice shirt!", "Great job! I'm proud of you.", "It's a specific pattern."], ans: 1
+            },
+            {
+                title: "4. Responding to Compliments",
+                content: `<p class="mb-3">Ketika menerima pujian, kita harus merespon dengan rendah hati.</p><ul class="list-disc pl-5 mb-3 text-sm"><li>"Thank you very much."</li><li>"It's very kind of you to say so."</li><li>"I'm glad you think so. But I still have to learn a lot."</li></ul><p class="text-sm italic">Sikap rendah hati ini sejalan dengan ajaran agama agar tidak sombong atas kelebihan yang dititipkan.</p>`,
+                q: "Respon mana yang menunjukkan kerendahan hati saat dipuji?", opts: ["Yes, I am the best.", "I know right?", "Thank you. But I still have to learn a lot."], ans: 2
+            },
+            {
+                title: "5. Grammar: Noun Phrases in Compliments",
+                content: `<p class="mb-3">Pujian sering menggunakan kata sifat (<em>adjectives</em>) dan kata benda (<em>nouns</em>) membentuk <strong>Noun Phrase</strong>.</p><p class="mb-2">Struktur: <strong>Adjective + Noun</strong></p><ul class="list-disc pl-5 mb-3 text-sm"><li>Beautiful (adj) + skirt (noun) = beautiful skirt</li><li>Magnificent (adj) + nature (noun) = magnificent nature</li></ul><p class="text-sm">Contoh lokal: "Banuroja has a <em>magnificent nature</em>."</p>`,
+                q: "Manakah yang merupakan bentuk Noun Phrase?", opts: ["Walk fast", "Gorgeous dress", "She sings"], ans: 1
+            },
+            {
+                title: "6. Encouragement (Memberi Semangat)",
+                content: `<p class="mb-3">Selain memuji, memberi dorongan empati di kala teman ragu sangatlah penting.</p><ul class="list-disc pl-5 mb-3 text-sm"><li>"Don't worry, you're a very good story teller. Good luck."</li><li>"Wish me luck." -> "I'm sure you will do your best!"</li></ul><div class="bg-blue-50 p-3 rounded border border-blue-200 text-sm"><strong>Korelasi KBC Cinta Tanah Air:</strong> Dengan saling mendukung pemuda-pemudi desa, kita memajukan kualitas generasi bangsa.</div>`,
+                q: "Apa kalimat yang tepat diucapkan saat temanmu gugup sebelum tampil?", opts: ["Don't worry, you are very good!", "You look gorgeous.", "It is beyond our control."], ans: 0
+            }
+        ];
+
+        let curMateri = 0;
+
+        function initBelajar() { curMateri = 0; renderMateri(); }
+
+        function renderMateri() {
+            document.getElementById('materiCurrent').innerText = curMateri + 1;
+            const mat = materiData[curMateri];
+            
+            const cont = document.getElementById('materiContent');
+            cont.innerHTML = `<h3 class="text-xl font-bold text-gray-800 mb-4">${mat.title}</h3><div class="text-gray-700 leading-relaxed text-justify fade-in">${mat.content}</div>`;
+
+            const act = document.getElementById('materiActivity');
+            act.innerHTML = `
+                <p class="font-bold text-blue-800 mb-3 text-sm"><i class="fas fa-question-circle mr-1"></i> Jawab untuk melanjutkan:</p>
+                <p class="text-gray-800 text-sm mb-3">${mat.q}</p>
+                <div class="flex flex-col space-y-2">
+                    ${mat.opts.map((opt, i) => `<button onclick="checkMateri(${i}, ${mat.ans}, this)" class="text-left px-4 py-2 bg-white rounded border border-blue-200 hover:bg-blue-100 transition text-sm text-gray-700 w-full">${String.fromCharCode(65+i)}. ${opt}</button>`).join('')}
+                </div>
+            `;
+            
+            const btn = document.getElementById('btnNextMateri');
+            btn.disabled = true;
+            btn.innerHTML = (curMateri === materiData.length - 1) ? 'Selesaikan Sesi <i class="fas fa-check ml-2"></i>' : 'Selesai & Lanjut <i class="fas fa-chevron-right ml-2"></i>';
+        }
+
+        function checkMateri(sel, ans, btnEl) {
+            const btns = document.getElementById('materiActivity').querySelectorAll('button');
+            btns.forEach(b => { b.disabled = true; b.classList.remove('bg-blue-100','hover:bg-blue-100'); });
+            if(sel === ans) {
+                btnEl.classList.add('bg-green-200', 'border-green-500', 'font-bold'); document.getElementById('btnNextMateri').disabled = false;
+            } else {
+                btnEl.classList.add('bg-red-200', 'border-red-500'); btns[ans].classList.add('bg-green-200', 'border-green-500'); document.getElementById('btnNextMateri').disabled = false;
+            }
+        }
+
+        function nextMateri() {
+            if(curMateri < materiData.length - 1) { curMateri++; renderMateri(); } 
+            else { if(!State.progress.belajarCompleted) { unlockNextSection('belajar'); } navTo('dashboardSection'); }
+        }
+
+        // --- DATA: STIMULUS TEKS (MIN 100 KATA) ---
+        const stimulusTexts = {
+            t1: `Di sebuah wilayah dataran tinggi di Gorontalo, tepatnya di Kecamatan Randangan, terdapat sebuah desa unik bernama Banuroja. Desa ini dijuluki sebagai miniaturnya Indonesia karena warganya yang sangat majemuk, terdiri dari berbagai suku seperti Bali, Jawa, Gorontalo, hingga Lombok, serta memeluk agama yang beragam pula. Meskipun berbeda-beda, masyarakat Banuroja selalu mengedepankan sikap saling menyayangi, menghargai, dan menjaga toleransi. Hal ini tercermin dari cara mereka berinteraksi sehari-hari. Misalnya, saat panen jagung tiba, Wayan yang beragama Hindu sering kali mendapatkan pujian dari tetangganya, Ahmad. "What a wonderful harvest you have this year, Wayan! Your hard work really pays off," ucap Ahmad. Wayan pun membalas dengan rendah hati, "Thank you very much, Ahmad. It's very kind of you to say that." Interaksi penuh kasih sayang ini tidak hanya menjaga keharmonisan warga, tetapi juga membuktikan bahwa perbedaan adalah kekuatan, sejalan dengan prinsip kerukunan umat beragama yang diajarkan dalam kurikulum Kemenag.`,
+            t2: `Setiap tahun, Madrasah Aliyah di Randangan mengadakan pameran seni untuk merayakan keberagaman budaya lokal. Para siswa antusias menampilkan karya terbaik mereka, mulai dari lukisan pemandangan perbukitan Randangan hingga kerajinan tangan dari bahan alam. Siti, seorang siswi yang aktif kinestetik, membuat sebuah miniatur rumah adat dengan detail yang sangat rumit menggunakan bambu dan kayu sisa. Saat pameran berlangsung, gurunya, Ibu Novi, terkesima melihat karya Siti. "Siti, this is absolutely terrific! You really did a great job combining the cultural elements. I am proud of your creativity," puji Ibu Novi sambil tersenyum. Mendengar itu, Siti merasa sangat termotivasi dan rasa percaya dirinya meningkat drastis. Ia merespons, "I am glad you like it, Mom. Your appreciation means a lot to me." Melalui pujian yang tulus, tidak hanya kepercayaan diri siswa yang terbangun, tetapi juga tercipta lingkungan belajar yang penuh kasih sayang dan saling mendukung satu sama lain.`,
+            t3: `Budi dan Ali adalah sahabat baik yang tinggal berdekatan di desa Banuroja. Suatu hari, Budi ditunjuk untuk mewakili sekolahnya dalam kompetisi pidato Bahasa Inggris tingkat kabupaten. Mengetahui hal itu, Budi merasa sangat gugup dan ragu akan kemampuannya. Ia takut melakukan kesalahan di depan banyak orang. Menyadari kecemasan sahabatnya, Ali segera mendekati Budi untuk memberikan semangat. "Don't worry, Budi. You have an amazing voice and you are a very good public speaker. I know you can do this perfectly! Good luck," kata Ali penuh keyakinan. Kata-kata penyemangat (encouragement) dari Ali bagaikan angin segar bagi Budi. Ia mengingat ajaran agamanya untuk selalu mengucapkan kata-kata yang baik (qaulan ma'rufa) yang menyejukkan hati. "Thank you, Ali. Wish me luck," balas Budi yang kini merasa jauh lebih tenang dan siap menghadapi tantangan. Dukungan dari seorang teman terbukti ampuh membangun rasa percaya diri dalam meraih prestasi.`,
+            t4: `Keindahan alam dataran tinggi Randangan sering kali menjadi daya tarik bagi wisatawan lokal. Hamparan bukit hijau, udara yang sejuk, serta aliran sungai yang jernih adalah anugerah Tuhan yang wajib disyukuri dan dijaga kelestariannya. Pada suatu akhir pekan, sebuah kelompok pemuda desa mengadakan kegiatan bersih-bersih sungai (river clean-up). Rina, yang baru saja bergabung dengan kelompok tersebut, bekerja sangat giat membersihkan sampah plastik di bantaran sungai. Ketua pemuda, Hasan, melihat dedikasi Rina dan berkata, "What an impressive effort, Rina! Your dedication to preserving our nature is truly awesome." Rina tersenyum malu dan menjawab, "It's nothing, Hasan. I just want our village to remain beautiful." Pujian dari Hasan merupakan bentuk apresiasi (compliment) yang tidak hanya menyenangkan hati Rina, tetapi juga mempererat rasa persaudaraan dan kecintaan mereka terhadap kelestarian alam dan lingkungan hidup di desa tercinta mereka.`
+        };
+
+        const stimulusAnimatedSVGs = {
+            t1: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full object-cover"><rect width="200" height="200" fill="#fef08a"/><g transform="translate(100, 160)"><path d="M0,0 Q-20,-50 0,-100 Q20,-50 0,0" fill="#166534"><animateTransform attributeName="transform" type="rotate" values="-5;5;-5" dur="2s" repeatCount="indefinite" /></path><path d="M0,0 Q-40,-30 -30,-80 Q0,-50 0,0" fill="#15803d"><animateTransform attributeName="transform" type="rotate" values="-8;8;-8" dur="2.5s" repeatCount="indefinite" /></path><path d="M0,0 Q40,-30 30,-80 Q0,-50 0,0" fill="#15803d"><animateTransform attributeName="transform" type="rotate" values="8;-8;8" dur="2.2s" repeatCount="indefinite" /></path></g><text x="100" y="180" font-family="Arial" font-weight="bold" font-size="14" fill="#166534" text-anchor="middle">Panen Jagung Banuroja</text></svg>`,
+            t2: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full object-cover"><rect width="200" height="200" fill="#e9d5ff"/><rect x="50" y="50" width="100" height="80" fill="none" stroke="#6b21a8" stroke-width="5"/><circle cx="100" cy="90" r="15" fill="#6b21a8"><animate attributeName="r" values="10;20;10" dur="1.5s" repeatCount="indefinite"/></circle><path d="M 60 120 L 80 90 L 100 110 L 120 70 L 140 120 Z" fill="#9333ea" opacity="0.8"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></path><text x="100" y="170" font-family="Arial" font-weight="bold" font-size="14" fill="#6b21a8" text-anchor="middle">Pameran Seni</text></svg>`,
+            t3: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full object-cover"><rect width="200" height="200" fill="#bae6fd"/><rect x="90" y="50" width="20" height="50" rx="10" fill="#0369a1"/><rect x="95" y="100" width="10" height="40" fill="#0369a1"/><path d="M70,70 Q70,110 100,110 Q130,110 130,70" fill="none" stroke="#0369a1" stroke-width="4"/><circle cx="100" cy="65" r="20" fill="none" stroke="#0284c7" stroke-width="2"><animate attributeName="r" values="25;45" dur="1s" repeatCount="indefinite"/><animate attributeName="opacity" values="1;0" dur="1s" repeatCount="indefinite"/></circle><text x="100" y="180" font-family="Arial" font-weight="bold" font-size="14" fill="#0369a1" text-anchor="middle">Lomba Pidato</text></svg>`,
+            t4: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" class="w-full h-full object-cover"><rect width="200" height="200" fill="#d9f99d"/><path d="M0,120 Q50,100 100,120 T200,120 L200,200 L0,200 Z" fill="#3f6212"><animate attributeName="d" values="M0,120 Q50,100 100,120 T200,120 L200,200 L0,200 Z; M0,120 Q50,140 100,120 T200,120 L200,200 L0,200 Z; M0,120 Q50,100 100,120 T200,120 L200,200 L0,200 Z" dur="3s" repeatCount="indefinite"/></path><path d="M0,140 Q50,120 100,140 T200,140 L200,200 L0,200 Z" fill="#65a30d" opacity="0.7"><animate attributeName="d" values="M0,140 Q50,120 100,140 T200,140 L200,200 L0,200 Z; M0,140 Q50,160 100,140 T200,140 L200,200 L0,200 Z; M0,140 Q50,120 100,140 T200,140 L200,200 L0,200 Z" dur="2s" repeatCount="indefinite"/></path><text x="100" y="180" font-family="Arial" font-weight="bold" font-size="14" fill="#3f6212" text-anchor="middle">Bersih Sungai</text></svg>`
+        };
+
+        // --- DATA: BERMAIN (Gamifikasi) ---
+        const bermainData = [
+            { type: "mcq", textKey: "t1", q: "Berdasarkan teks di atas, pujian (compliment) apa yang diberikan Ahmad kepada Wayan?", opts: ["You are a very good public speaker.", "What a wonderful harvest you have this year!", "Your house is very beautiful."], ans: 1 },
+            { type: "mcq", textKey: "t1", q: "Bagaimana cara Wayan merespons pujian Ahmad dengan kerendahan hati?", opts: ["I know right? I am the best.", "Thank you very much. It's very kind of you to say that.", "Don't worry about it."], ans: 1 },
+            { type: "mcq", textKey: "t2", q: "Karya apa yang dibuat Siti sehingga mendapatkan pujian?", opts: ["Miniatur rumah adat yang rumit", "Lukisan perbukitan", "Tarian daerah"], ans: 0 },
+            { type: "mcq", textKey: "t2", q: "Kata sifat (adjective) apa yang digunakan Ibu Novi dalam memuji (noun phrase) karya Siti?", opts: ["Terrific", "Proud", "Absolutely"], ans: 0 },
+            { type: "mcq", textKey: "t3", q: "Tujuan utama Ali mengatakan 'Don't worry... I know you can do this perfectly!' adalah untuk...", opts: ["Mengejek Budi", "Memberikan dukungan empati (encouraging)", "Memuji pakaian Budi"], ans: 1 },
+            { type: "mcq", textKey: "t3", q: "Bagaimana perasaan Budi setelah diberikan semangat oleh Ali?", opts: ["Lebih tenang dan siap (percaya diri)", "Marah dan sedih", "Biasa saja"], ans: 0 },
+            { type: "mcq", textKey: "t4", q: "Kegiatan apa yang sedang dilakukan oleh pemuda desa?", opts: ["Membersihkan balai desa", "Membersihkan sungai (river clean-up)", "Memanen jagung"], ans: 1 },
+            { type: "mcq", textKey: "t4", q: "Pujian 'What an impressive effort' termasuk ke dalam jenis pujian...", opts: ["Complimenting appearance", "Complimenting achievement/effort", "Encouragement"], ans: 1 },
+            { type: "complex", textKey: "t1", q: "Manakah DUA pernyataan yang mencerminkan integrasi nilai Kurikulum Berbasis Cinta pada teks 1?", opts: ["Ahmad memuji panen Wayan (Cinta sesama) DAN menjaga keharmonisan beda agama", "Wayan sombong atas panennya DAN Ahmad marah", "Desa Banuroja menolak perbedaan DAN saling bertengkar"], ans: 0 },
+            { type: "mcq", textKey: "t4", q: "Rina menjawab 'It's nothing... I just want our village to remain beautiful.' Respons ini menunjukkan karakter yang...", opts: ["Sombong", "Percaya Diri", "Rendah hati (Humble)"], ans: 2 }
+        ];
+
+        let exploreState = {
+            t1: { completed: false, qs: [0, 1, 8], name: "Ladang Jagung", icon: "fa-seedling", color: "text-yellow-600", bg: "bg-yellow-100" },
+            t2: { completed: false, qs: [2, 3], name: "Pameran Seni", icon: "fa-palette", color: "text-purple-600", bg: "bg-purple-100" },
+            t3: { completed: false, qs: [4, 5], name: "Panggung Pidato", icon: "fa-microphone", color: "text-blue-600", bg: "bg-blue-100" },
+            t4: { completed: false, qs: [6, 7, 9], name: "Bantaran Sungai", icon: "fa-water", color: "text-green-600", bg: "bg-green-100" }
+        };
+        let curExploreLoc = null;
+        let curExploreQ = 0;
+        let totalBermainAnswered = 0;
+
+        function initBermain() {
+            Object.keys(exploreState).forEach(k => exploreState[k].completed = false);
+            totalBermainAnswered = 0;
+            State.scores.bermain = 0;
+            trackedBermainAnswers = []; // Reset tracker GAS
+            document.getElementById('bermainScore').innerText = State.scores.bermain;
+            
+            renderMap();
+        }
+
+        function renderMap() {
+            document.getElementById('bermainChallenge').classList.add('hidden-section');
+            document.getElementById('bermainMap').classList.remove('hidden-section');
+            document.getElementById('bermainProgressText').innerText = `Lokasi Selesai: ${Object.values(exploreState).filter(s => s.completed).length} / 4`;
+            
+            const mapContainer = document.getElementById('bermainMapCards');
+            mapContainer.innerHTML = Object.keys(exploreState).map(key => {
+                const loc = exploreState[key];
+                if (loc.completed) {
+                    return `<div class="glass-card p-6 border-2 border-green-500 bg-green-50 opacity-80 flex flex-col items-center justify-center text-center shadow-sm"><div class="w-16 h-16 rounded-full bg-green-200 flex items-center justify-center text-green-600 text-3xl mb-4"><i class="fas fa-check"></i></div><h3 class="text-xl font-bold text-gray-800">${loc.name}</h3><p class="text-sm text-green-600 font-bold mt-2">Selesai dieksplorasi</p></div>`;
+                } else {
+                    return `<div onclick="openLocation('${key}')" class="glass-card p-6 cursor-pointer transform transition hover:-translate-y-2 hover:shadow-xl border-2 border-transparent hover:border-purple-300 flex flex-col items-center justify-center text-center group"><div class="w-16 h-16 rounded-full ${loc.bg} flex items-center justify-center ${loc.color} text-3xl mb-4 group-hover:scale-110 transition"><i class="fas ${loc.icon}"></i></div><h3 class="text-xl font-bold text-gray-800">${loc.name}</h3><p class="text-sm text-gray-500 mt-2">Klik untuk mengeksplorasi</p></div>`;
+                }
+            }).join('');
+        }
+
+        function openLocation(key) {
+            curExploreLoc = key; curExploreQ = 0;
+            document.getElementById('bermainMap').classList.add('hidden-section');
+            document.getElementById('bermainChallenge').classList.remove('hidden-section');
+            renderExploreQuestion();
+        }
+
+        function renderExploreQuestion() {
+            const loc = exploreState[curExploreLoc];
+            const qIndex = loc.qs[curExploreQ];
+            const item = bermainData[qIndex];
+            
+            document.getElementById('bermainProgressText').innerText = `Tantangan ${loc.name}: ${curExploreQ + 1} / ${loc.qs.length}`;
+            document.getElementById('bermainFeedback').className = 'hidden';
+            
+            document.getElementById('bermainStimulus').innerText = stimulusTexts[item.textKey];
+            
+            const imgContainer = document.getElementById('bermainImageContainer');
+            imgContainer.innerHTML = stimulusAnimatedSVGs[item.textKey];
+            imgContainer.classList.remove('fade-in'); void imgContainer.offsetWidth; imgContainer.classList.add('fade-in');
+            
+            const qArea = document.getElementById('bermainQuestion');
+            qArea.innerHTML = `
+                <p class="font-bold text-gray-800 text-lg mb-4">${item.q}</p>
+                <div class="grid grid-cols-1 gap-3">
+                    ${item.opts.map((opt, i) => `
+                        <button onclick="checkExplore(${i}, ${item.ans}, this)" class="bermain-opt text-left px-5 py-4 bg-white rounded-xl border-2 border-gray-200 hover:border-purple-400 hover:bg-purple-50 transition font-medium text-gray-700 shadow-sm">${String.fromCharCode(65+i)}. ${opt}</button>
+                    `).join('')}
+                </div>
+                <button id="btnNextBermain" onclick="nextExplore()" class="mt-6 w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 rounded-xl shadow hidden">Selanjutnya <i class="fas fa-arrow-right ml-2"></i></button>
+            `;
+        }
+
+        function checkExplore(sel, ans, btnEl) {
+            const btns = document.querySelectorAll('.bermain-opt');
+            btns.forEach(b => { b.disabled = true; });
+            
+            const fb = document.getElementById('bermainFeedback');
+            fb.classList.remove('hidden', 'text-green-500', 'text-red-500');
+            
+            // Lacak untuk GAS
+            const loc = exploreState[curExploreLoc];
+            const qIndex = loc.qs[curExploreQ];
+            const item = bermainData[qIndex];
+            trackedBermainAnswers.push({
+                q: item.q,
+                ansText: item.opts[sel],
+                isCorrect: (sel === ans)
+            });
+            
+            if(sel === ans) {
+                btnEl.classList.replace('border-gray-200', 'border-green-500'); btnEl.classList.add('bg-green-100');
+                State.scores.bermain += 10; document.getElementById('bermainScore').innerText = State.scores.bermain;
+                fb.classList.add('text-green-500'); fb.innerHTML = '<i class="fas fa-check-circle"></i> Tepat Sekali! (+10)';
+            } else {
+                btnEl.classList.replace('border-gray-200', 'border-red-500'); btnEl.classList.add('bg-red-100');
+                btns[ans].classList.replace('border-gray-200', 'border-green-500'); btns[ans].classList.add('bg-green-100');
+                fb.classList.add('text-red-500'); fb.innerHTML = '<i class="fas fa-times-circle"></i> Kurang Tepat!';
+            }
+            
+            document.getElementById('btnNextBermain').classList.remove('hidden');
+        }
+
+        function nextExplore() {
+            const loc = exploreState[curExploreLoc];
+            if (curExploreQ < loc.qs.length - 1) {
+                curExploreQ++; renderExploreQuestion();
+            } else {
+                loc.completed = true; totalBermainAnswered += loc.qs.length;
+                if (totalBermainAnswered >= 10) {
+                    if(!State.progress.bermainCompleted) { unlockNextSection('bermain'); }
+                    navTo('dashboardSection');
+                } else {
+                    renderMap(); showMessage("Lokasi Selesai", `Tantangan di ${loc.name} selesai! Silakan pilih lokasi lainnya.`, "info");
+                }
+            }
+        }
+        
+        function backToMap() { renderMap(); }
+
+        // --- DATA: BERLATIH (Asesmen) ---
+        const berlatihData = [
+            { level: 1, textKey: "t1", q: "Siapakah yang memberikan pujian (compliment) dalam cerita di Banuroja?", opts: ["Wayan", "Ahmad", "Kepala Desa", "Siti", "Budi"], ans: 1 },
+            { level: 1, textKey: "t2", q: "Apa frasa (Noun Phrase) yang digunakan Ibu Novi untuk mendeskripsikan pekerjaan Siti?", opts: ["Rumit", "Bambu sisa", "Great job", "Rumah adat", "Tarian"], ans: 2 },
+            { level: 1, textKey: "t3", q: "Kata 'Encouragement' bersinonim makna paling dekat dengan...", opts: ["Pujian fisik", "Ejekan", "Dukungan/Dorongan semangat", "Menyerah", "Penolakan"], ans: 2 },
+            { level: 2, textKey: "t1", q: "Jika Anda berada di posisi Wayan dan ada yang memuji pakaian Anda, respon bahasa Inggris mana yang paling sesuai?", opts: ["Yes, it is very expensive.", "I don't care.", "Thank you, it's very kind of you to say that.", "You are wrong.", "Look at me!"], ans: 2 },
+            { level: 2, textKey: "t2", q: "Dari situasi Siti, efek psikologis utama dari compliment yang diberikan gurunya adalah...", opts: ["Siti menjadi sombong", "Kepercayaan diri Siti meningkat (build confidence)", "Siti berhenti berkarya", "Siti marah", "Siti merasa takut"], ans: 1 },
+            { level: 2, textKey: "t3", q: "Dalam konteks moderasi dan kasih sayang (KBC), tindakan Ali kepada Budi membuktikan bahwa...", opts: ["Teman hanya peduli saat senang", "Kompetisi harus dimenangkan dengan curang", "Kasih sayang sesama diwujudkan dengan saling menguatkan", "Budi lemah", "Ali ingin ikut lomba"], ans: 2 },
+            { level: 2, textKey: "t4", q: "Berdasarkan kutipan 'Your dedication to preserving our nature is truly awesome', kata 'preserving' bermakna...", opts: ["Merusak", "Memuji", "Meninggalkan", "Melestarikan/Menjaga", "Menonton"], ans: 3 },
+            { level: 3, textKey: "t1", q: "Berdasarkan prinsip toleransi di Banuroja, simpulkan peran kalimat pujian dalam struktur interaksi sosial masyarakat majemuk!", opts: ["Hanya sekadar basa-basi tanpa makna", "Alat untuk mencari keuntungan pribadi", "Jembatan empati yang meruntuhkan sekat perbedaan dan merawat kerukunan", "Bentuk kelemahan warga", "Kewajiban hukum yang memaksa"], ans: 2 },
+            { level: 3, textKey: "t3", q: "Evaluasilah kaitan antara ucapan Ali ('You have an amazing voice') dengan ayat Al-Qur'an (QS. Al-Baqarah: 83 - wa qulu lin-nasi husna)!", opts: ["Tidak ada kaitan sama sekali", "Keduanya menuntut materi", "Ucapan Ali adalah implementasi nyata dari perintah berbicara baik dan menenangkan hati manusia", "Ayat tersebut melarang kita memuji orang lain", "Ali melanggar aturan kompetisi"], ans: 2 },
+            { level: 3, textKey: "t4", q: "Bagaimana Anda memformulasikan pujian baru yang lebih komprehensif (mengandung apresiasi tindakan dan empati) untuk Rina?", opts: ["Good girl.", "You pick trash.", "I admire your hard work and deep care for our village's environment. You're an inspiration!", "Stop doing that, it's dirty.", "I am better than you."], ans: 2 }
+        ];
+
+        let curBerlatih = 0;
+
+        function initBerlatih() {
+            curBerlatih = 0; trackedBerlatihAnswers = [];
+            State.scores.l1 = 0; State.scores.l2 = 0; State.scores.l3 = 0;
+            renderBerlatih();
+        }
+
+        function renderBerlatih() {
+            document.getElementById('berlatihCurrent').innerText = curBerlatih + 1;
+            const item = berlatihData[curBerlatih];
+            
+            document.getElementById('berlatihStimulus').innerText = stimulusTexts[item.textKey];
+            
+            const badge = document.getElementById('berlatihLevelBadge');
+            if(item.level === 1) { badge.innerText = "Level 1 (Dasar)"; badge.className = "bg-green-500 text-white px-3 py-1 rounded-full text-xs font-bold mb-1 shadow-sm"; }
+            else if(item.level === 2) { badge.innerText = "Level 2 (Aplikasi)"; badge.className = "bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold mb-1 shadow-sm"; }
+            else { badge.innerText = "Level 3 (HOTS)"; badge.className = "bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold mb-1 shadow-sm"; }
+
+            const qArea = document.getElementById('berlatihQuestion');
+            qArea.innerHTML = `
+                <p class="font-bold text-gray-800 text-lg mb-4">${item.q}</p>
+                <div class="grid grid-cols-1 gap-2">
+                    ${item.opts.map((opt, i) => `
+                        <button onclick="selectBerlatih(${i})" class="berlatih-opt text-left px-4 py-3 bg-white rounded-xl border border-gray-300 hover:border-kemenagGreen hover:bg-green-50 transition text-gray-700 shadow-sm text-sm">
+                            <span class="font-bold mr-2">${String.fromCharCode(65+i)}.</span> ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function selectBerlatih(sel) {
+            const item = berlatihData[curBerlatih];
+            
+            // Tracker untuk GAS
+            trackedBerlatihAnswers.push({
+                q: item.q,
+                ansText: item.opts[sel],
+                isCorrect: (sel === item.ans)
+            });
+
+            // Hitung poin (L1=@8, L2=@10, L3=@12) Total 100
+            if(sel === item.ans) {
+                if(item.level === 1) State.scores.l1 += 1;
+                else if(item.level === 2) State.scores.l2 += 1;
+                else if(item.level === 3) State.scores.l3 += 1;
+            }
+
+            if(curBerlatih < berlatihData.length - 1) {
+                curBerlatih++; renderBerlatih();
+            } else {
+                finishBerlatih();
+            }
+        }
+
+        function finishBerlatih() {
+            // Kalkulasi nilai akhir
+            const scoreL1 = State.scores.l1 * 8;
+            const scoreL2 = State.scores.l2 * 10;
+            const scoreL3 = State.scores.l3 * 12;
+            State.scores.berlatih = scoreL1 + scoreL2 + scoreL3;
+            
+            // --- Mengirim Data Hasil Belajar ke GAS ---
+            sendHasilToGAS();
+
+            generateReport();
+            navTo('reportSection');
+        }
+
+        function sendHasilToGAS() {
+            if (GAS_URL === "URL_GAS_ANDA_DISINI") {
+                showMessage("Evaluasi Selesai!", "Mari kita lihat laporan hasil belajarmu. (Data tidak tersimpan karena GAS_URL belum di-setting).", "success");
+                return;
+            }
+
+            // Tampilkan loading sebentar jika perlu (atau biarkan di background)
+            showMessage("Menyimpan Data", "Tunggu sebentar, data sedang dikirim ke server...", "info");
+
+            const payload = {
+                action: "saveHasil",
+                nama: State.student.name,
+                kelas: State.student.class,
+                bermainAnswers: trackedBermainAnswers,
+                berlatihAnswers: trackedBerlatihAnswers
+            };
+
+            fetch(GAS_URL, {
+                method: 'POST',
+                redirect: 'follow',
+                headers: {
+                    'Content-Type': 'text/plain;charset=utf-8',
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => res.json())
+            .then(data => {
+                showMessage("Evaluasi Selesai!", "Kerja Bagus! Semua data latihanmu telah tersimpan ke sistem. Mari kita lihat laporan hasil belajarmu.", "success");
+            })
+            .catch(e => {
+                console.error("Error saving data:", e);
+                showMessage("Evaluasi Selesai!", "Ada kendala jaringan saat menyimpan ke server, namun kamu tetap bisa melihat laporan hasil belajarmu.", "success");
+            });
+        }
+
+        // --- REPORT & PDF ---
+        function generateReport() {
+            document.getElementById('repName').innerText = State.student.name;
+            document.getElementById('repClass').innerText = State.student.class;
+            
+            const today = new Date();
+            document.getElementById('repDate').innerText = `${today.getDate()}/${today.getMonth()+1}/${today.getFullYear()}`;
+            
+            document.getElementById('repSkorBermain').innerText = State.scores.bermain;
+            document.getElementById('repSkorBerlatih').innerText = State.scores.berlatih;
+            
+            document.getElementById('repL1').innerText = `${State.scores.l1} / 3`;
+            document.getElementById('repL2').innerText = `${State.scores.l2} / 4`;
+            document.getElementById('repL3').innerText = `${State.scores.l3} / 3`;
+
+            const finalScore = State.scores.berlatih;
+            const repPredikat = document.getElementById('repPredikat');
+            const repRekomendasi = document.getElementById('repRekomendasi');
+
+            if(finalScore >= 85) {
+                repPredikat.innerText = `SANGAT BAIK (A) - Skor: ${finalScore}`; repRekomendasi.innerText = "Kemampuan literasi kritis dan penalaran HOTS Anda sangat luar biasa. Anda sudah mampu berempati dan menerapkan nilai kurikulum dengan sangat baik.";
+            } else if(finalScore >= 70) {
+                repPredikat.innerText = `BAIK (B) - Skor: ${finalScore}`; repRekomendasi.innerText = "Anda memiliki pemahaman yang baik mengenai complimenting. Tingkatkan lagi penalaran tingkat tinggi (HOTS) pada soal-soal kompleks.";
+            } else {
+                repPredikat.innerText = `PERLU BIMBINGAN (C) - Skor: ${finalScore}`; repRekomendasi.innerText = "Jangan menyerah! Silakan ulangi membaca materi pada menu Belajar untuk memperdalam pemahaman bahasa Inggris dan nilai-nilai kebaikan.";
+            }
+        }
+
+        function downloadPDF() {
+            const element = document.getElementById('printableReport');
+            const opt = {
+                margin:       10,
+                filename:     `Laporan_MPI_${State.student.name.replace(/\s+/g, '_')}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2 },
+                jsPDF:        { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(opt).from(element).save().catch(err => {
+                console.log('PDF generation failed, falling back to print', err); window.print();
+            });
+        }
+
+        // --- TONE.JS MUSIK CERIA ---
+        let isBgmPlaying = false; let isBgmMuted = false; let toneSynth = null; let toneSequence = null;
+
+        async function setupMusic() {
+            if (toneSynth) return; 
+            await Tone.start();
+            toneSynth = new Tone.PolySynth(Tone.Synth, { oscillator: { type: "triangle8" }, envelope: { attack: 0.01, decay: 1.5, sustain: 0.1, release: 2 } }).toDestination();
+            toneSynth.volume.value = -8; 
+            const notes = [ ["0:0:0", "C4"], ["0:0:2", "E4"], ["0:1:0", "G4"], ["0:1:2", "C5"], ["0:2:0", "F4"], ["0:2:2", "A4"], ["0:3:0", "C5"] ];
+            toneSequence = new Tone.Part((time, note) => { toneSynth.triggerAttackRelease(note, "8n", time); }, notes).start(0);
+            toneSequence.loop = true; toneSequence.loopEnd = "1m"; Tone.Transport.bpm.value = 120;
+        }
+
+        async function playBGM() {
+            if (isBgmMuted) return; await setupMusic(); Tone.Transport.start(); isBgmPlaying = true;
+            const icon = document.getElementById('bgmToggleIcon'); if(icon) icon.className = 'fas fa-volume-up text-purple-600';
+        }
+
+        function stopBGM() { if (isBgmPlaying) { Tone.Transport.stop(); isBgmPlaying = false; } }
+
+        function toggleBGM() {
+            isBgmMuted = !isBgmMuted; const icon = document.getElementById('bgmToggleIcon');
+            if (isBgmMuted) { stopBGM(); if(icon) icon.className = 'fas fa-volume-mute text-gray-500'; } 
+            else { playBGM(); }
+        }
+    </script>
+</body>
+</html>
